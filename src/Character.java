@@ -6,6 +6,7 @@ public class Character {
     private String name;
     private int hp ;
     private boolean isAlive ;
+
     public Character(String name, int hp){
         this.id=generateId();
         this.name=name;
