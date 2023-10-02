@@ -12,7 +12,9 @@ public class Warrior extends Character  implements Attacker {
     }
 
     public void setHp(int hp) {
-        super.setHp(new Random().nextInt(100, 200));
+
+        super.setHp(new Random().nextInt(101) + 100);
+
     }
 
     public int getStamina() {
@@ -20,7 +22,8 @@ public class Warrior extends Character  implements Attacker {
     }
 
     public void setStamina(int stamina) {
-        this.stamina = new Random().nextInt(10, 50);
+
+        this.stamina = new Random().nextInt(41) + 10;
     }
 
     public int getStrength() {
@@ -28,13 +31,13 @@ public class Warrior extends Character  implements Attacker {
     }
 
     public void setStrength(int strength) {
-        this.strength = new Random().nextInt(1, 10);
+        this.strength = new Random().nextInt(10) + 1;
     }
 
     @Override
     public void attack(Character character) {
         int attack = 0;
-        int attackRandom = new Random().nextInt(0,1);
+        int attackRandom = new Random().nextInt();
 
         if(attackRandom == 0)
             attack =weakAttack();
