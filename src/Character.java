@@ -1,7 +1,7 @@
 import  java.util.Random;
 import java.util.UUID;
 
-public class Character {
+public abstract class Character {
     private final String id;
     private String name;
     private int hp ;
