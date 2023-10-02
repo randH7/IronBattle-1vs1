@@ -6,7 +6,6 @@ public class IronBattleDemo {
         chooseMenu();
     }
 
-    //TODO default sout re-enter number
     public static void chooseMenu(){
         Scanner inputUser = new Scanner(System.in);
         int inputNumber;
@@ -21,6 +20,8 @@ public class IronBattleDemo {
                     startRandomBattle();
                 case 3:
                     System.exit(0);
+                default:
+                    System.err.println("WRONG INPUT! Please enter a number that in the menu.");
             }
         }while (inputNumber <= 1 || inputNumber >= 3);
 
@@ -30,26 +31,20 @@ public class IronBattleDemo {
         Character p1 = customizeCharacter(1);
         Character p2 = customizeCharacter(2);
         int roundNum = 0;
-        int scoreP1 = 0;
-        int scoreP2 = 0;
         String winnerP = "";
 
         do{
             roundNum++;
 
-            printRoundInfo(roundNum, p1, p2, scoreP1, scoreP2);
+            printRoundInfo(roundNum, p1, p2);
 
             winnerP = startBattle(p1, p2);
 
-            if(winnerP == p1.getId()){
-                scoreP1++;
-            }else if(winnerP == p2.getId()){
-                scoreP2++;
-            }
 
-        }while ( roundNum == 1 || scoreP1 == scoreP2);
 
-        printWinner();
+        }while (p1.isAlive() || p2.isAlive());
+
+        printWinner(winnerP);
         chooseMenu();
 
     }
@@ -84,7 +79,6 @@ public class IronBattleDemo {
         System.out.println("| ______________________________________________ |");
     }
 
-    //TODO default sout re-enter number
     public static Character customizeCharacter(int playerNumber){
         Scanner inputUser = new Scanner(System.in);
         System.out.println("| ______________________________________________ |");
@@ -100,20 +94,52 @@ public class IronBattleDemo {
             inputNumber = inputUser.nextInt();
             switch (inputNumber){
                 case 1:
-                    return new Warrior(inputName, 0);
+                    return new Warrior(inputName, 0,0,0);
                 case 2:
-                    return new Wizard(inputName, 0);
+                    return new Wizard(inputName, 0,0,2);
+                default:
+                    System.err.println("WRONG INPUT! Please enter a number that in the menu.");
             }
         }while (inputNumber != 1 && inputNumber !=2);
 
         return null;
     }
 
-    //TODO
-    public static void printRoundInfo(int roundNum, Character p1, Character p2, int score1, int score2){
+    public static void printRoundInfo(int roundNum, Character p1, Character p2){
+        String nameP1 = p1.getClass().getSimpleName();
+        String nameP2 = p2.getClass().getSimpleName();
+
         System.out.println("| ______________________________________________ |");
         System.out.println("|                    ROUND #"+roundNum+"                    |");
+        if(nameP1.equals("Warrior")) {
+            System.out.println("| ______________________________________________ |");
+            System.out.println("|  🧝🏼 "+p1.getName());
+            System.out.println("|  HP: "+ p1.getHp());
+            System.out.println("|  Stamina: "+((Warrior) p1).getStamina());
+            System.out.println("|  Strength: "+((Warrior) p1).getStrength());
+        }
+        else if(nameP1.equals("Wizard")) {
+            System.out.println("| ______________________________________________ |");
+            System.out.println("|  🧙🏼‍♂️ "+p1.getName());
+            System.out.println("|  HP: "+ p1.getHp());
+            System.out.println("|  Stamina: "+((Wizard) p1).getMana());
+            System.out.println("|  Strength: "+((Wizard) p1).getIntelligence());
+        }
 
+        if(nameP2.equals("Warrior")) {
+            System.out.println("| ______________________________________________ |");
+            System.out.println("|  🧝🏼 "+p2.getName());
+            System.out.println("|  HP: "+ p2.getHp());
+            System.out.println("|  Stamina: "+((Warrior) p2).getStamina());
+            System.out.println("|  Strength: "+((Warrior) p2).getStrength());
+        }
+        else if(nameP2.equals("Wizard")) {
+            System.out.println("| ______________________________________________ |");
+            System.out.println("|  🧙🏼‍♂️ "+p2.getName());
+            System.out.println("|  HP: "+ p2.getHp());
+            System.out.println("|  Stamina: "+((Wizard) p2).getMana());
+            System.out.println("|  Strength: "+((Wizard) p2).getIntelligence());
+        }
         System.out.println("| ______________________________________________ |");
     }
 
@@ -124,7 +150,7 @@ public class IronBattleDemo {
     }
 
     //TODO
-    public static void printWinner(){
+    public static void printWinner(String winnerP){
 
     }
 
