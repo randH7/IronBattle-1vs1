@@ -156,7 +156,56 @@ public class IronBattleDemo {
 
     //TODO
     public static String startRound(int roundNum, Character p1, Character p2){
-
+        Scanner inputAttack = new Scanner(System.in);
+        String nameP1 = p1.getClass().getSimpleName();
+        String nameP2 = p2.getClass().getSimpleName();
+        printRoundInfo(roundNum, p1, p2);
+        System.out.println("| ______________________________________________ |");
+        System.out.println("|                                                |");
+        System.out.println("|          :joystick: LET'S START THE ROUND :joystick:           |");
+        System.out.println("|              Press Enter to Start              |");
+        inputAttack.nextLine();
+        System.out.println("| ********************************************** |");
+        System.out.println("|                                                |");
+        System.out.println("|                 Your Turn P1,                  |");
+        System.out.println("|                                                |");
+        if(nameP1.equals("Warrior")) {
+            ((Warrior) p1).attack(p2);
+            System.out.println("|  Type Attack: "+p1.getTypeAttack());
+        }else if (nameP1.equals("Wizard")) {
+            ((Wizard) p1).attack(p2);
+            System.out.println("|  Type Attack: "+p1.getTypeAttack());
+        }
+        System.out.println("|                                                |");
+        System.out.println("|            Press Enter to ATTACK P2            |");
+        inputAttack.nextLine();
+        System.out.println("| ********************************************** |");
+        System.out.println("|                                                |");
+        System.out.println("|                 Your Turn P2,                  |");
+        System.out.println("|                                                |");
+        if(nameP2.equals("Warrior")) {
+            ((Warrior) p2).attack(p1);
+            System.out.println("|  Type Attack: "+p2.getTypeAttack());
+        }else if (nameP2.equals("Wizard")) {
+            ((Wizard) p2).attack(p1);
+            System.out.println("|  Type Attack: "+p2.getTypeAttack());
+        }
+        System.out.println("|                                                |");
+        System.out.println("|            Press Enter to ATTACK P1            |");
+        inputAttack.nextLine();
+        System.out.println("| ______________________________________________ |");
+        if(p1.getHp() <= 0)
+            p1.setAlive(false);
+        if(p2.getHp() <= 0)
+            p2.setAlive(false);
+        if(p1.isAlive() == false || p2.isAlive() == false){
+            if(p1.getHp() > p2.getHp())
+                return p1.getId();
+            else if(p2.getHp() > p1.getHp())
+                return p2.getId();
+            else if (p1.getHp() == p2.getHp())
+                return "tie";
+        }
         return "";
     }
 
