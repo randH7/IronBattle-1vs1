@@ -7,6 +7,7 @@ public class IronBattleDemo {
     }
 
     public static void chooseMenu(){
+
         Scanner inputUser = new Scanner(System.in);
         int inputNumber;
 
@@ -28,6 +29,7 @@ public class IronBattleDemo {
     }
 
     public static void startCustomizeBattle(){
+
         Character p1 = customizeCharacter(1);
         Character p2 = customizeCharacter(2);
         int roundNum = 0;
@@ -36,16 +38,19 @@ public class IronBattleDemo {
         do{
             roundNum++;
 
-            printRoundInfo(roundNum, p1, p2);
-
-            winnerP = startBattle(p1, p2);
+            winnerP = startRound(roundNum, p1, p2);
 
 
 
-        }while (p1.isAlive() || p2.isAlive());
+        }while (winnerP == "");
 
-        printWinner(winnerP);
-        chooseMenu();
+        if(winnerP == "tie"){
+            printTie();
+            startCustomizeBattle();
+        } else {
+            printWinner(winnerP);
+            chooseMenu();
+        }
 
     }
 
@@ -110,7 +115,11 @@ public class IronBattleDemo {
         String nameP2 = p2.getClass().getSimpleName();
 
         System.out.println("| ______________________________________________ |");
+        System.out.println("|                                                |");
         System.out.println("|                    ROUND #"+roundNum+"                    |");
+        System.out.println("| ______________________________________________ |");
+        System.out.println("|                                                |");
+        System.out.println("|                    PLAYER #1                   |");
         if(nameP1.equals("Warrior")) {
             System.out.println("| ______________________________________________ |");
             System.out.println("|  🧝🏼 "+p1.getName());
@@ -125,7 +134,9 @@ public class IronBattleDemo {
             System.out.println("|  Stamina: "+((Wizard) p1).getMana());
             System.out.println("|  Strength: "+((Wizard) p1).getIntelligence());
         }
-
+        System.out.println("| ______________________________________________ |");
+        System.out.println("|                                                |");
+        System.out.println("|                    PLAYER #2                   |");
         if(nameP2.equals("Warrior")) {
             System.out.println("| ______________________________________________ |");
             System.out.println("|  🧝🏼 "+p2.getName());
@@ -144,13 +155,18 @@ public class IronBattleDemo {
     }
 
     //TODO
-    public static String startBattle(Character p1, Character P2){
+    public static String startRound(int roundNum, Character p1, Character p2){
 
         return "";
     }
 
     //TODO
     public static void printWinner(String winnerP){
+
+    }
+
+    //TODO
+    public static void printTie(){
 
     }
 

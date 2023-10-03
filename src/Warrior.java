@@ -1,29 +1,23 @@
 import java.util.Random;
 
 public class Warrior extends Character  implements Attacker {
+
     private int stamina;
     private int strength;
 
     public Warrior(String name, int hp, int stamina, int strength) {
         super(name, hp);
-        setHp(hp);
-        setStamina(stamina);
-        setStrength(strength);
-    }
-
-    public void setHp(int hp) {
-
-        super.setHp(new Random().nextInt(101) + 100);
-
+        setHp(new Random().nextInt(101) + 100);
+        setStamina(new Random().nextInt(41) + 10);
+        setStrength(new Random().nextInt(10) + 1);
     }
 
     public int getStamina() {
-        return this.stamina;
+        return stamina;
     }
 
     public void setStamina(int stamina) {
-
-        this.stamina = new Random().nextInt(41) + 10;
+        this.stamina = stamina;
     }
 
     public int getStrength() {
@@ -31,25 +25,26 @@ public class Warrior extends Character  implements Attacker {
     }
 
     public void setStrength(int strength) {
-        this.strength = new Random().nextInt(10) + 1;
+        this.strength = strength;
     }
 
     @Override
     public void attack(Character character) {
         int attack = 0;
-        int attackRandom = new Random().nextInt();
+        int attackRandom = new Random().nextInt(2);
 
         if(attackRandom == 0)
-            attack =weakAttack();
+            attack = weakAttack();
         else if(attackRandom == 1)
-            attack =heavyAttack();
+            attack = heavyAttack();
 
-        character.setHp((character.getHp()-attack));
+        character.setHp((character.getHp() - attack));
     }
 
     public int heavyAttack(){
         if(stamina >= 5){
             stamina -= 5;
+            super.setTypeAttack("Heavy Attack 🗡️");
             return strength;
         } else {
             return weakAttack();
@@ -59,10 +54,13 @@ public class Warrior extends Character  implements Attacker {
     public int weakAttack(){
         if(stamina > 0){
             stamina++;
+            super.setTypeAttack("Weak Attack 🏹");
             return strength/2;
         } else {
             stamina += 2;
+            super.setTypeAttack("You don't have the stamina to do Attack. \n               So we will give you a gift (🧪 stamina ++2)");
             return 0;
         }
     }
+
 }

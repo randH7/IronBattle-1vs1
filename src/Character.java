@@ -1,25 +1,23 @@
-import  java.util.Random;
 import java.util.UUID;
 
 public abstract class Character {
+
     private final String id;
     private String name;
     private int hp ;
     private boolean isAlive ;
+    private String typeAttack;
 
     public Character(String name, int hp){
         this.id=generateId();
-        this.name=name;
-        this.hp=hp;
-        this.isAlive =true;
-
+        setName(name);
+        setHp(hp);
+        setAlive(true);
     }
 
     public String getId() {
         return id;
     }
-
-
 
     public String getName() {
         return name;
@@ -42,13 +40,20 @@ public abstract class Character {
     }
 
     public void setAlive(boolean alive) {
-        isAlive = alive;
+        this.isAlive = alive;
     }
+
+    public String getTypeAttack() {
+        return typeAttack;
+    }
+
+    public void setTypeAttack(String typeAttack) {
+        this.typeAttack = typeAttack;
+    }
+
     private String generateId() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString();
     }
 
 }
-
-
