@@ -44,7 +44,7 @@ public class Wizard extends Character implements Attacker {
     public int fireball() {
         if (mana >= 5) {
             mana -= 5;
-            super.setTypeAttack("Fireball 🔥");
+            super.setTypeAttack("|                  Fireball 🔥                   |");
             return intelligence;
         } else {
             return staffHit();
@@ -54,11 +54,11 @@ public class Wizard extends Character implements Attacker {
     public int staffHit() {
         if (mana > 0) {
             mana++;
-            super.setTypeAttack("Staff hit 🪄");
+            super.setTypeAttack("|                  Staff Hit 🪄                  |");
             return 2;
         } else {
             mana += 2;
-            super.setTypeAttack("You don't have the mana to do Attack. \n               So we will give you a gift (🫙 mana ++2)");
+            super.setTypeAttack("|      You don't have the mana to do Attack      |\n|    So we will give you a gift (🫙 mana ++2)    |");
             return 0;
         }
     }

@@ -44,7 +44,7 @@ public class Warrior extends Character  implements Attacker {
     public int heavyAttack(){
         if(stamina >= 5){
             stamina -= 5;
-            super.setTypeAttack("Heavy Attack 🗡️");
+            super.setTypeAttack("|                Heavy Attack 🗡️                 |");
             return strength;
         } else {
             return weakAttack();
@@ -54,11 +54,11 @@ public class Warrior extends Character  implements Attacker {
     public int weakAttack(){
         if(stamina > 0){
             stamina++;
-            super.setTypeAttack("Weak Attack 🏹");
+            super.setTypeAttack("|                 Weak Attack 🏹                 |");
             return strength/2;
         } else {
             stamina += 2;
-            super.setTypeAttack("You don't have the stamina to do Attack. \n               So we will give you a gift (🧪 stamina ++2)");
+            super.setTypeAttack("|    You don't have the stamina to do Attack     |\n|   So we will give you a gift (🧪 stamina ++2)  |");
             return 0;
         }
     }

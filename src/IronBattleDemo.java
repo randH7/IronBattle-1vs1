@@ -211,7 +211,7 @@ public class IronBattleDemo {
         printRoundInfo(roundNum, p1, p2);
         System.out.println("| ______________________________________________ |");
         System.out.println("|                                                |");
-        System.out.println("|          :joystick: LET'S START THE ROUND :joystick:           |");
+        System.out.println("|          🕹️ LET'S START THE ROUND 🕹️           |");
         System.out.println("|              Press Enter to Start              |");
         inputAttack.nextLine();
         System.out.println("| ********************************************** |");
@@ -220,11 +220,16 @@ public class IronBattleDemo {
         System.out.println("|                                                |");
         if(nameP1.equals("Warrior")) {
             ((Warrior) p1).attack(p2);
-            System.out.println("|  Type Attack: "+p1.getTypeAttack());
+            System.out.println("|                 (Type Attack)                 |");
+            System.out.println("|                       ⇓                        |");
+            System.out.println(p1.getTypeAttack());
         }else if (nameP1.equals("Wizard")) {
             ((Wizard) p1).attack(p2);
-            System.out.println("|  Type Attack: "+p1.getTypeAttack());
+            System.out.println("|                 (Type Attack)                 |");
+            System.out.println("|                       ⇓                        |");
+            System.out.println(p1.getTypeAttack());
         }
+        System.out.println("|                                                |");
         System.out.println("|                                                |");
         System.out.println("|            Press Enter to ATTACK P2            |");
         inputAttack.nextLine();
@@ -234,11 +239,16 @@ public class IronBattleDemo {
         System.out.println("|                                                |");
         if(nameP2.equals("Warrior")) {
             ((Warrior) p2).attack(p1);
-            System.out.println("|  Type Attack: "+p2.getTypeAttack());
+            System.out.println("|                 (Type Attack)                  |");
+            System.out.println("|                       ⇓                        |");
+            System.out.println(p2.getTypeAttack());
         }else if (nameP2.equals("Wizard")) {
             ((Wizard) p2).attack(p1);
-            System.out.println("|  Type Attack: "+p2.getTypeAttack());
+            System.out.println("|                 (Type Attack)                  |");
+            System.out.println("|                       ⇓                        |");
+            System.out.println(p2.getTypeAttack());
         }
+        System.out.println("|                                                |");
         System.out.println("|                                                |");
         System.out.println("|            Press Enter to ATTACK P1            |");
         inputAttack.nextLine();
@@ -272,11 +282,16 @@ public class IronBattleDemo {
         System.out.println("|                                                |");
         if(nameP1.equals("Warrior")) {
             ((Warrior) p1).attack(p2);
-            System.out.println("|  Type Attack: "+p1.getTypeAttack());
+            System.out.println("|                 (Type Attack)                  |");
+            System.out.println("|                       ⇓                        |");
+            System.out.println(p1.getTypeAttack());
         }else if (nameP1.equals("Wizard")) {
             ((Wizard) p1).attack(p2);
-            System.out.println("|  Type Attack: "+p1.getTypeAttack());
+            System.out.println("|                 (Type Attack)                  |");
+            System.out.println("|                       ⇓                        |");
+            System.out.println(p1.getTypeAttack());
         }
+        System.out.println("|                                                |");
         System.out.println("|                                                |");
         System.out.println("|            Press Enter to ATTACK P2            |");
         System.out.println("| ********************************************** |");
@@ -285,11 +300,16 @@ public class IronBattleDemo {
         System.out.println("|                                                |");
         if(nameP2.equals("Warrior")) {
             ((Warrior) p2).attack(p1);
-            System.out.println("|  Type Attack: "+p2.getTypeAttack());
+            System.out.println("|                 (Type Attack)                  |");
+            System.out.println("|                       ⇓                        |");
+            System.out.println(p2.getTypeAttack());
         }else if (nameP2.equals("Wizard")) {
             ((Wizard) p2).attack(p1);
-            System.out.println("|  Type Attack: "+p2.getTypeAttack());
+            System.out.println("|                 (Type Attack)                  |");
+            System.out.println("|                       ⇓                        |");
+            System.out.println(p2.getTypeAttack());
         }
+        System.out.println("|                                                |");
         System.out.println("|                                                |");
         System.out.println("|            Press Enter to ATTACK P1            |");
         System.out.println("| ______________________________________________ |");
