@@ -1,13 +1,17 @@
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 public class IronBattleDemo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         chooseMenu();
     }
 
-    public static void chooseMenu(){
+    public static void chooseMenu() throws IOException {
 
         Scanner inputUser = new Scanner(System.in);
         int inputNumber;
@@ -18,18 +22,24 @@ public class IronBattleDemo {
             switch (inputNumber){
                 case 1:
                     startCustomizeBattle();
+                    break;
                 case 2:
                     startRandomBattle();
+                    break;
                 case 3:
+                    startCSVBattle();
+                    break;
+                case 4:
                     System.exit(0);
+                    break;
                 default:
                     System.err.println("WRONG INPUT!\nPlease enter a number that in the menu.");
             }
-        }while (inputNumber <= 1 || inputNumber >= 3);
+        }while (inputNumber <= 1 || inputNumber >= 4);
 
     }
 
-    public static void startCustomizeBattle(){
+    public static void startCustomizeBattle() throws IOException{
 
         Character p1 = customizeCharacter(1);
         Character p2 = customizeCharacter(2);
@@ -64,7 +74,7 @@ public class IronBattleDemo {
 
     }
 
-    public static void startRandomBattle(){
+    public static void startRandomBattle() throws IOException {
 
         int characterP1 = new Random().nextInt(2); // 0 = warrior   1 = wizard
         int characterP2 = new Random().nextInt(2);
@@ -95,6 +105,47 @@ public class IronBattleDemo {
         }
     }
 
+    public static void startCSVBattle() throws IOException{
+
+        List<String[]> characterNames = readCSV();
+
+        String[] ch1 = getCharacterSelected(1, characterNames);
+        String[] ch2 = getCharacterSelected(2, characterNames);
+
+        Character p1 = characterCVS(ch1[1], ch1[0]);
+        Character p2 = characterCVS(ch2[1], ch2[0]);
+
+        int roundNum = 0;
+        String winnerP = "";
+
+        do{
+            roundNum++;
+            winnerP = startRound(roundNum, p1, p2);
+        }while (winnerP == "");
+
+        printRoundInfo(roundNum, p1, p2);
+
+        if(winnerP == "tie"){
+            printTie();
+            Scanner input = new Scanner(System.in);
+            input.nextLine();
+            startCSVBattle();
+        } else {
+            if(winnerP.equals(p1.getId())) {
+                printWinner(1);
+                Scanner input = new Scanner(System.in);
+                input.nextLine();
+            }else if (winnerP.equals(p2.getId())) {
+                printWinner(2);
+                Scanner input = new Scanner(System.in);
+                input.nextLine();
+            }
+
+            chooseMenu();
+        }
+
+    }
+
     public static void printStartMenu(){
         System.out.println("| ______________________________________________ |");
         System.out.println("|            WELCOME TO IRON BATTLE ⚔️           |");
@@ -106,7 +157,8 @@ public class IronBattleDemo {
         System.out.println("|                                                |");
         System.out.println("|               1) Customize Battle              |");
         System.out.println("|               2) Random Battle                 |");
-        System.out.println("|               3) Exit                          |");
+        System.out.println("|               3) Import Character              |");
+        System.out.println("|               4) Exit                          |");
         System.out.println("| ______________________________________________ |");
     }
 
@@ -154,6 +206,21 @@ public class IronBattleDemo {
         if(characterRandom == 0)
             character = new Warrior(name, 0, 0, 0);
         else if(characterRandom == 1)
+            character = new Wizard(name, 0, 0, 0);
+
+        return character;
+
+    }
+
+    public static Character characterCVS(String typeCharacter, String name){
+
+        typeCharacter = typeCharacter.replaceAll("\"", "").trim();
+        name = name.replaceAll("\"", "").trim();
+        Character character = new Warrior(null, 0, 0, 0);
+
+        if(typeCharacter.equals("Warrior"))
+            character = new Warrior(name, 0, 0, 0);
+        else if(typeCharacter.equals("Wizard"))
             character = new Wizard(name, 0, 0, 0);
 
         return character;
@@ -347,6 +414,71 @@ public class IronBattleDemo {
         System.out.println("|                                                |");
         System.out.println("|          ❗THE BATTLE END IN A TIE❗           |");
         System.out.println("|             Press Enter to Restart             |");
+        System.out.println("| ______________________________________________ |");
+    }
+
+    public static List<String[]> readCSV() throws IOException{
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("| ______________________________________________ |");
+        System.out.println("|                                                |");
+        System.out.println("|       Please enter the path of your file       |");
+        System.out.println("|            that you want to import 📝          |");
+        System.out.println("|                                                |");
+        System.out.println("|          ex. C:\\Desktop\\IronBattle.csv         |");
+        System.out.println("|            ⚠️ JUST SUPPORT CSV FILES           |");
+        System.out.println("| ______________________________________________ |");
+        String filePath = userInput.next();
+
+        FileReader file = new FileReader(filePath);
+        Scanner reader = new Scanner(file);
+
+        String data = reader.nextLine();
+
+        List<String[]> characterNames = new ArrayList<>();
+        System.out.println("|                       🔃                       |");
+        while (reader.hasNextLine()) {
+            data = reader.nextLine();
+
+            String[] row = data.split(",");
+
+            characterNames.add(row);
+        }
+
+        reader.close();
+
+        return characterNames;
+    }
+
+    public static String[] getCharacterSelected(int playerNumber, List<String[]> characterNames)  {
+
+        Scanner inputUser = new Scanner(System.in);
+
+        int inputIndex;
+        do {
+            printCharacterName(characterNames, playerNumber);
+            inputIndex = inputUser.nextInt();
+
+            if(inputIndex < 1 || inputIndex > characterNames.size())
+                System.err.println("WRONG INPUT!\nPlease enter a number that in the menu.");
+        }while (inputIndex < 1 || inputIndex > characterNames.size());
+
+        return characterNames.get(inputIndex-1);
+    }
+
+    public static void printCharacterName(List<String[]> characterNames, int playerNumber){
+
+        System.out.println("| ______________________________________________ |");
+        System.out.println("|                                                |");
+        System.out.println("|            P"+playerNumber+" select character 👤,             |");
+        System.out.println("|        Type in a number below and enter.       |");
+        System.out.println("|                                                |");
+        int index = 1;
+        for (String[] character: characterNames) {
+            System.out.println("|  "+ index +") Name: " + character[0]);
+            System.out.println("|     Type Character: " + character[1]);
+            System.out.println("|                                                |");
+            index ++;
+        }
         System.out.println("| ______________________________________________ |");
     }
 
