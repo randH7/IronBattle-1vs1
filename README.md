@@ -1,15 +1,11 @@
-# IronBattle-1vs1
-Iron Battle is a fun and challenging turn-based game inspired by classic RPGs that will consist of two characters fighting to determine one winner ⚔️. 
+# ⚔️ IronBattle-1vs1 &middot; [![release](https://badgen.net/badge/version/v1.0.0/cyan?scale=1)](https://github.com/randH7/IronBattle-1vs1/releases/)
+Iron Battle is a fun and challenging turn-based game inspired by classic RPGs that will consist of two characters fighting to determine one winner. 
 <br>Players choose from three types of battle:
 1) Customize Battle: Users begin by entering their names and then selecting the character "Wizard or Warrior" to start the game.
 2) Random Battle: The game begins by randomly selecting characters for the boots to start playing.
 3) Import Character: The user can import any file support CSV and we will import the names and characters as a list, and then the players will choose one of them to start the game.
+   
 <br>
-
-[![Group 1](https://github.com/randH7/IronBattle-1vs1/assets/107724456/44446486-5ccb-40c0-bc7e-53ce7f675d80)](https://github.com/randH7/IronBattle-1vs1/releas)
-
-<br>
-
 
 ## 💻 Tech
 This game was created with only Java, which the output will display on the console.
