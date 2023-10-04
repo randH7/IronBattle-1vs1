@@ -288,12 +288,12 @@ public class IronBattleDemo {
         if(nameP1.equals("Warrior")) {
             ((Warrior) p1).attack(p2);
             System.out.println("|                 (Type Attack)                 |");
-            System.out.println("|                       ⇓                        |");
+            System.out.println("|                       ⇓                       |");
             System.out.println(p1.getTypeAttack());
         }else if (nameP1.equals("Wizard")) {
             ((Wizard) p1).attack(p2);
             System.out.println("|                 (Type Attack)                 |");
-            System.out.println("|                       ⇓                        |");
+            System.out.println("|                       ⇓                       |");
             System.out.println(p1.getTypeAttack());
         }
         System.out.println("|                                                |");
